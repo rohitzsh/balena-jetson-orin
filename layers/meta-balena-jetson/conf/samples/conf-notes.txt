@@ -9,9 +9,14 @@
 
 Resin specific images available:
 	balena-image
+	balena-image-flasher
 
-Forecr DSBOARD NX2 Xavier NX eMMC        : $ MACHINE=forecr-dsb-nx2-xavier-nx-emmc bitbake balena-image
+Forecr DSBOARD-ORNX-LAN Nano 8GB         : $ MACHINE=forecr-dsb-ornx-orin-nano-8gb bitbake balena-image-flasher
+Nvidia Jetson AGX Orin 64GB Devkit       : $ MACHINE=jetson-agx-orin-devkit-64gb bitbake balena-image-flasher
 Nvidia Jetson AGX Orin Devkit            : $ MACHINE=jetson-agx-orin-devkit bitbake balena-image
-Nvidia Jetson Orin NX in Xavier NX Devkit : $ MACHINE=jetson-orin-nx-xavier-nx-devkit bitbake balena-image
-Nvidia Jetson Xavier AGX                 : $ MACHINE=jetson-xavier bitbake balena-image
+Nvidia Jetson Orin Nano 8GB (SD) Devkit NVME : $ MACHINE=jetson-orin-nano-devkit-nvme bitbake balena-image-flasher
+Seeed ReComputer J3010                   : $ MACHINE=jetson-orin-nano-seeed-j3010 bitbake balena-image-flasher
+Nvidia Jetson Orin NX in Seeed ReComputer J4012 : $ MACHINE=jetson-orin-nx-seeed-j4012 bitbake balena-image-flasher
+Nvidia Jetson Orin NX in Xavier NX Devkit NVME : $ MACHINE=jetson-orin-nx-xavier-nx-devkit bitbake balena-image-flasher
+Nexcom ATC3750-8M AGX Orin 64GB          : $ MACHINE=nexcom-atc3750-8m-agx-orin-64gb bitbake balena-image-flasher
 

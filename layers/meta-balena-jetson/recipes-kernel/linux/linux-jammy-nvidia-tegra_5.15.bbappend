@@ -153,6 +153,22 @@ BALENA_CONFIGS[lan743x] = " \
     CONFIG_LAN743X=m \
 "
 
+# Nexcom ATC3750-8M specific configurations
+BALENA_CONFIGS:append:nexcom-atc3750-8m-agx-orin-64gb = " nexcom_atc3750 rtc"
+BALENA_CONFIGS[nexcom_atc3750] = " \
+    CONFIG_AQR_PHY=m \
+    CONFIG_MICREL_PHY=m \
+    CONFIG_SPI_TEGRA210_QUAD=m \
+    CONFIG_USB_SERIAL_FTDI_SIO=m \
+    CONFIG_USB_SERIAL_PL2303=m \
+    CONFIG_USB_ACM=m \
+"
+
+BALENA_CONFIGS[rtc] = " \
+    CONFIG_RTC_HCTOSYS_DEVICE="rtc0" \
+    CONFIG_RTC_SYSTOHC_DEVICE="rtc0" \
+"
+
 L4TVER=" l4tver=${L4T_VERSION}"
 
 KERNEL_ARGS += "${@bb.utils.contains('DISTRO_FEATURES','osdev-image',' mminit_loglevel=4 console=tty0 console=ttyTCU0,115200 ',' console=null quiet splash vt.global_cursor_default=0 consoleblank=0',d)} l4tver=${L4T_VERSION} rootdelay=1 roottimeout=60 "

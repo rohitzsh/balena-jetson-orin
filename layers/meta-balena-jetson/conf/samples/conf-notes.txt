@@ -18,5 +18,6 @@ Nvidia Jetson Orin Nano 8GB (SD) Devkit NVME : $ MACHINE=jetson-orin-nano-devkit
 Seeed ReComputer J3010                   : $ MACHINE=jetson-orin-nano-seeed-j3010 bitbake balena-image-flasher
 Nvidia Jetson Orin NX in Seeed ReComputer J4012 : $ MACHINE=jetson-orin-nx-seeed-j4012 bitbake balena-image-flasher
 Nvidia Jetson Orin NX in Xavier NX Devkit NVME : $ MACHINE=jetson-orin-nx-xavier-nx-devkit bitbake balena-image-flasher
+Nexcom ATC3750-8M AGX Orin 32GB          : $ MACHINE=nexcom-atc3750-8m-agx-orin-32gb bitbake balena-image-flasher
 Nexcom ATC3750-8M AGX Orin 64GB          : $ MACHINE=nexcom-atc3750-8m-agx-orin-64gb bitbake balena-image-flasher
 

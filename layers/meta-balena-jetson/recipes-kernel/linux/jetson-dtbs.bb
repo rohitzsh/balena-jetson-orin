@@ -107,3 +107,16 @@ FILES:${PN}:nexcom-atc3750-8m-agx-orin-32gb += " \
 FILES:${PN}:nexcom-atc3750-8m-agx-orin-64gb += " \
 	/boot/tegra234-p3701-0005-atc3750-8M-base_ver.dtb \
 "
+
+# Deploy DTB files to DEPLOYDIR for nvidia-kernel-oot-dtb to find
+do_deploy:append:nexcom-atc3750-8m-agx-orin-32gb() {
+	install -d ${DEPLOYDIR}/devicetree/
+	install -m 0644 "${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0004-atc3750-8M-base_ver.dtb" "${DEPLOYDIR}/devicetree/tegra234-p3701-0004-atc3750-8M-base_ver.dtb"
+}
+
+do_deploy:append:nexcom-atc3750-8m-agx-orin-64gb() {
+	install -d ${DEPLOYDIR}/devicetree/
+	install -m 0644 "${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0005-atc3750-8M-base_ver.dtb" "${DEPLOYDIR}/devicetree/tegra234-p3701-0005-atc3750-8M-base_ver.dtb"
+}
+
+addtask deploy before do_build after do_install

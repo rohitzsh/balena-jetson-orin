@@ -65,6 +65,11 @@ do_deploy:append:nexcom-atc3750-8m-agx-orin-64gb() {
         ${DEPLOYDIR}/devicetree/
 }
 
+# Set machine-specific architecture for Nexcom devices to ensure
+# DTB files are deployed to the correct machine-specific work directory
+PACKAGE_ARCH:nexcom-atc3750-8m-agx-orin-32gb = "${MACHINE_ARCH}"
+PACKAGE_ARCH:nexcom-atc3750-8m-agx-orin-64gb = "${MACHINE_ARCH}"
+
 # Base do_deploy function for device-specific DTB files
 do_deploy() {
     install -d ${DEPLOYDIR}/devicetree/

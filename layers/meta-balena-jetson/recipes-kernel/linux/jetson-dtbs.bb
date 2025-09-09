@@ -16,6 +16,14 @@ SRC_URI:append:forecr-dsb-ornx-lan = " \
     file://forecr-dsb-ornx-lan/tegra234-p3768-0000+p3767-0003-nv-super.dtb \
 "
 
+SRC_URI:append:nexcom-atc3750-8m-agx-orin-32gb = " \
+    file://nexcom-atc3750-8m/tegra234-p3701-0004-atc3750-8M-base_ver.dtb \
+"
+
+SRC_URI:append:nexcom-atc3750-8m-agx-orin-64gb = " \
+    file://nexcom-atc3750-8m/tegra234-p3701-0005-atc3750-8M-base_ver.dtb \
+"
+
 S = "${WORKDIR}"
 DTBNAME = "${@os.path.basename(d.getVar('KERNEL_DEVICETREE', True).split()[0])}"
 
@@ -51,6 +59,16 @@ do_install:append:jetson-orin-nano-seeed-j3010() {
         install -m 0644 "${DEPLOY_DIR_IMAGE}/devicetree/tegra234-p3768-0000+p3767-0004-nv-super.dtb" "${D}/boot/tegra234-p3768-0000+p3767-0004-nv-super.dtb"
 }
 
+do_install:nexcom-atc3750-8m-agx-orin-32gb() {
+	install -d ${D}/boot/
+	install -m 0644 "${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0004-atc3750-8M-base_ver.dtb" "${D}/boot/tegra234-p3701-0004-atc3750-8M-base_ver.dtb"
+}
+
+do_install:nexcom-atc3750-8m-agx-orin-64gb() {
+	install -d ${D}/boot/
+	install -m 0644 "${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0005-atc3750-8M-base_ver.dtb" "${D}/boot/tegra234-p3701-0005-atc3750-8M-base_ver.dtb"
+}
+
 FILES:${PN}:jetson-agx-orin-devkit += " \
 	/boot/tegra234-p3737-0000+p3701-0000-nv.dtb \
 	/boot/tegra234-p3737-0000+p3701-0000-nv-spi.dtb \
@@ -80,4 +98,12 @@ FILES:${PN}:jetson-agx-orin-devkit-64gb += " \
 FILES:${PN}:forecr-dsb-ornx-lan += " \
         /boot/${DTBNAME} \
 	/boot/tegra234-p3768-0000+p3767-0003-nv-super.dtb \
+"
+
+FILES:${PN}:nexcom-atc3750-8m-agx-orin-32gb += " \
+	/boot/tegra234-p3701-0004-atc3750-8M-base_ver.dtb \
+"
+
+FILES:${PN}:nexcom-atc3750-8m-agx-orin-64gb += " \
+	/boot/tegra234-p3701-0005-atc3750-8M-base_ver.dtb \
 "

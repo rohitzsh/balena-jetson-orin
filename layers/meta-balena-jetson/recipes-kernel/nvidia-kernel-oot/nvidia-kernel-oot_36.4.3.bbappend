@@ -1,5 +1,7 @@
 FILESEXTRAPATHS:append := ":${THISDIR}/${PN}"
 
+inherit deploy
+
 SRC_URI += "  \
     file://enable_80211d.patch \
 "
@@ -62,3 +64,10 @@ do_deploy:append:nexcom-atc3750-8m-agx-orin-64gb() {
         ${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0005-atc3750-8M-base_ver.dtb \
         ${DEPLOYDIR}/devicetree/
 }
+
+# Base do_deploy function for device-specific DTB files
+do_deploy() {
+    install -d ${DEPLOYDIR}/devicetree/
+}
+
+addtask deploy before do_build after do_install

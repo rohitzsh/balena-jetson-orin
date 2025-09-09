@@ -5,7 +5,10 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 # In Jetpack 6.2 the nvidia-kernel-oot-dtb deploys all device-trees
+# Nexcom devices bypass this dependency as they provide pre-built DTBs
 do_install[depends] += " nvidia-kernel-oot-dtb:do_deploy "
+do_install[depends]:remove:nexcom-atc3750-8m-agx-orin-32gb = " nvidia-kernel-oot-dtb:do_deploy "
+do_install[depends]:remove:nexcom-atc3750-8m-agx-orin-64gb = " nvidia-kernel-oot-dtb:do_deploy "
 
 SRC_URI += " file://tegra234-p3737-0000+p3701-0000-nv-spi.dtb "
 
@@ -81,6 +84,29 @@ do_deploy:append:jetson-orin-nano-seeed-j3010() {
         install -m 0644 "${DEPLOY_DIR_IMAGE}/devicetree/tegra234-p3768-0000+p3767-0004-nv-super.dtb" "${DEPLOYDIR}/devicetree/tegra234-p3768-0000+p3767-0004-nv-super.dtb"
 }
 
+# Nexcom ATC3750-8M devices use pre-built DTBs and bypass nvidia-kernel-oot-dtb dependency
+do_install:nexcom-atc3750-8m-agx-orin-32gb() {
+	install -d ${D}/boot/
+	# DTB is deployed by nvidia-kernel-oot recipe, get it from there
+	install -m 0644 "${STAGING_DIR_HOST}/boot/devicetree/${DTBNAME}" "${D}/boot/${DTBNAME}"
+}
+
+do_deploy:nexcom-atc3750-8m-agx-orin-32gb() {
+	install -d ${DEPLOYDIR}/devicetree/
+	install -m 0644 "${STAGING_DIR_HOST}/boot/devicetree/${DTBNAME}" "${DEPLOYDIR}/devicetree/${DTBNAME}"
+}
+
+do_install:nexcom-atc3750-8m-agx-orin-64gb() {
+	install -d ${D}/boot/
+	# DTB is deployed by nvidia-kernel-oot recipe, get it from there
+	install -m 0644 "${STAGING_DIR_HOST}/boot/devicetree/${DTBNAME}" "${D}/boot/${DTBNAME}"
+}
+
+do_deploy:nexcom-atc3750-8m-agx-orin-64gb() {
+	install -d ${DEPLOYDIR}/devicetree/
+	install -m 0644 "${STAGING_DIR_HOST}/boot/devicetree/${DTBNAME}" "${DEPLOYDIR}/devicetree/${DTBNAME}"
+}
+
 FILES:${PN}:jetson-agx-orin-devkit += " \
 	/boot/tegra234-p3737-0000+p3701-0000-nv.dtb \
 	/boot/tegra234-p3737-0000+p3701-0000-nv-spi.dtb \
@@ -110,4 +136,12 @@ FILES:${PN}:jetson-agx-orin-devkit-64gb += " \
 FILES:${PN}:forecr-dsb-ornx-lan += " \
         /boot/${DTBNAME} \
 	/boot/tegra234-p3768-0000+p3767-0003-nv-super.dtb \
+"
+
+FILES:${PN}:nexcom-atc3750-8m-agx-orin-32gb += " \
+	/boot/${DTBNAME} \
+"
+
+FILES:${PN}:nexcom-atc3750-8m-agx-orin-64gb += " \
+	/boot/${DTBNAME} \
 "

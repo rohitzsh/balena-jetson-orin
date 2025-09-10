@@ -10,6 +10,10 @@ SRC_URI += "  \
 SRC_URI:append:nexcom-atc3750-8m-agx-orin-32gb = " file://0001-dts-add-atc3750-8M-dts.patch"
 SRC_URI:append:nexcom-atc3750-8m-agx-orin-64gb = " file://0001-dts-add-atc3750-8M-dts.patch"
 
+# Add ATC3750-6C DTS patch for both 32GB and 64GB variants
+SRC_URI:append:nexcom-atc3750-6c-agx-orin-32gb = " file://0001-dts-add-atc3750-6C-dts.patch"
+SRC_URI:append:nexcom-atc3750-6c-agx-orin-64gb = " file://0001-dts-add-atc3750-6C-dts.patch"
+
 SRC_URI:append:forecr-dsb-ornx-lan = " \
     file://forecr-dsb-ornx-lan/tegra234-p3768-0000+p3767-0000-dynamic.dtbo \
     file://forecr-dsb-ornx-lan/tegra234-p3767-camera-dsboard-ornx-imx219.dtbo \

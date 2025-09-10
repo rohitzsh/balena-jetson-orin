@@ -19,5 +19,5 @@ do_install:append() {
 
 RDEPENDS:${PN} = "bash"
 
-# Only install for Nexcom ATC3750 variants
-COMPATIBLE_MACHINE = "nexcom-atc3750-8m-agx-orin-32gb|nexcom-atc3750-8m-agx-orin-64gb"
+# Only install for Nexcom ATC3750 variants (both 8M and 6C)
+COMPATIBLE_MACHINE = "nexcom-atc3750-8m-agx-orin-32gb|nexcom-atc3750-8m-agx-orin-64gb|nexcom-atc3750-6c-agx-orin-32gb|nexcom-atc3750-6c-agx-orin-64gb"

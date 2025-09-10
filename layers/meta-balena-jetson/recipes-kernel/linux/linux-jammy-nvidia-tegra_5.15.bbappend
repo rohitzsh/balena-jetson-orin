@@ -16,9 +16,23 @@ SRC_URI:append:nexcom-atc3750-8m-agx-orin-64gb = " \
     file://0002-driver-support-LTE-modules.patch \
 "
 
-# Add ATC3750 kernel configuration fragment to both variants
+SRC_URI:append:nexcom-atc3750-6c-agx-orin-32gb = " \
+    file://atc3xxx-modified-configuration.cfg \
+    file://0001-ksz9477-for-nexcom-atc3750-6c-customized-build.patch \
+    file://0002-driver-support-LTE-modules.patch \
+"
+
+SRC_URI:append:nexcom-atc3750-6c-agx-orin-64gb = " \
+    file://atc3xxx-modified-configuration.cfg \
+    file://0001-ksz9477-for-nexcom-atc3750-6c-customized-build.patch \
+    file://0002-driver-support-LTE-modules.patch \
+"
+
+# Add ATC3750 kernel configuration fragment to both 8M and 6C variants
 KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-8m-agx-orin-32gb = " atc3xxx-modified-configuration.cfg"
 KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-8m-agx-orin-64gb = " atc3xxx-modified-configuration.cfg"
+KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-6c-agx-orin-32gb = " atc3xxx-modified-configuration.cfg"
+KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-6c-agx-orin-64gb = " atc3xxx-modified-configuration.cfg"
 
 SCMVERSION="n"
 

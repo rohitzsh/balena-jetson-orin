@@ -20,13 +20,9 @@ SRC_URI:append:forecr-dsb-ornx-lan = " \
     file://forecr-dsb-ornx-lan/tegra234-p3767-camera-dsboard-ornx-imx477.dtbo \
 "
 
-SRC_URI:append:nexcom-atc3750-8m-agx-orin-32gb = " \
-    file://nexcom-atc3750-8m/tegra234-p3701-0004-atc3750-8M-base_ver.dtb \
-"
-
-SRC_URI:append:nexcom-atc3750-8m-agx-orin-64gb = " \
-    file://nexcom-atc3750-8m/tegra234-p3701-0005-atc3750-8M-base_ver.dtb \
-"
+# NOTE: Pre-built DTB files removed in favor of DTS patches above
+# This ensures consistent approach: compile DTBs from source patches
+# instead of using duplicate pre-built binaries
 
 # Note tegra-...-dynamic.dtbo overwrites a file with the same name from Nvidia,
 # but the camera overlays are new files
@@ -48,30 +44,10 @@ do_deploy:append:forecr-dsb-ornx-lan() {
         ${DEPLOYDIR}/devicetree/
 }
 
-do_install:append:nexcom-atc3750-8m-agx-orin-32gb() {
-    install -m 0644 \
-        ${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0004-atc3750-8M-base_ver.dtb \
-        ${D}/boot/devicetree/
-}
+# NOTE: do_install for ATC3750 DTBs removed - now handled by DTS patches
 
-do_install:append:nexcom-atc3750-8m-agx-orin-64gb() {
-    install -m 0644 \
-        ${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0005-atc3750-8M-base_ver.dtb \
-        ${D}/boot/devicetree/
-}
-
-# Deploying is necessary for nvidia-kernel-oot-dtb to find the DTB files
-do_deploy:append:nexcom-atc3750-8m-agx-orin-32gb() {
-    install -m 0644 \
-        ${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0004-atc3750-8M-base_ver.dtb \
-        ${DEPLOYDIR}/devicetree/
-}
-
-do_deploy:append:nexcom-atc3750-8m-agx-orin-64gb() {
-    install -m 0644 \
-        ${WORKDIR}/nexcom-atc3750-8m/tegra234-p3701-0005-atc3750-8M-base_ver.dtb \
-        ${DEPLOYDIR}/devicetree/
-}
+# NOTE: do_deploy for ATC3750 DTBs removed - now handled by DTS patches
+# DTBs compiled from DTS patches will be automatically deployed
 
 # Set machine-specific architecture for Nexcom devices to ensure
 # DTB files are deployed to the correct machine-specific work directory

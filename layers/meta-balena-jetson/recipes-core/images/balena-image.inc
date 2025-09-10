@@ -45,3 +45,4 @@ MACHINE_EXTRA_RDEPENDS += " kernel-image-initramfs"
 
 IMAGE_INSTALL:remove = "kernel-image-image"
 
+IMAGE_ROOTFS_MAXSIZE="4194304"

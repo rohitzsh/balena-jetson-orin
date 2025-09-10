@@ -1,5 +1,10 @@
 FILESEXTRAPATHS:append := ":${THISDIR}/${PN}"
 
+do_patch:after() {
+    bb.plain("Patches applied. Listing contents of work directory:")
+    ls -R ${WORKDIR}
+}
+
 inherit deploy
 
 SRC_URI += "  \
@@ -19,10 +24,6 @@ SRC_URI:append:forecr-dsb-ornx-lan = " \
     file://forecr-dsb-ornx-lan/tegra234-p3767-camera-dsboard-ornx-imx219.dtbo \
     file://forecr-dsb-ornx-lan/tegra234-p3767-camera-dsboard-ornx-imx477.dtbo \
 "
-
-# NOTE: Pre-built DTB files removed in favor of DTS patches above
-# This ensures consistent approach: compile DTBs from source patches
-# instead of using duplicate pre-built binaries
 
 # Note tegra-...-dynamic.dtbo overwrites a file with the same name from Nvidia,
 # but the camera overlays are new files

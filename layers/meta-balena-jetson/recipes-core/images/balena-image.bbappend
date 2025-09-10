@@ -1,5 +1,8 @@
 include balena-image.inc
 
+# Disable license manifest creation to avoid licensing issues
+COPY_LIC_MANIFEST = "0"
+
 do_image:balenaos-img[depends] += " tegra-flash-dry:do_deploy l4t-launcher-extlinux:do_install edk2-container:do_package"
 
 # Leave some space, just in case future L4Ts add device specific partitions
@@ -11,6 +14,10 @@ DEVICE_SPECIFIC_SPACE:jetson-orin-nx-seeed-j4012 = "598016"
 DEVICE_SPECIFIC_SPACE:jetson-orin-nano-seeed-j3010 = "598016"
 DEVICE_SPECIFIC_SPACE:jetson-agx-orin-devkit-64gb = "598016"
 DEVICE_SPECIFIC_SPACE:forecr-dsb-ornx-lan = "598016"
+DEVICE_SPECIFIC_SPACE:nexcom-atc3750-8m-agx-orin-32gb = "667648"
+DEVICE_SPECIFIC_SPACE:nexcom-atc3750-8m-agx-orin-64gb = "667648"
+DEVICE_SPECIFIC_SPACE:nexcom-atc3750-6c-agx-orin-32gb = "667648"
+DEVICE_SPECIFIC_SPACE:nexcom-atc3750-6c-agx-orin-64gb = "667648"
 
 BALENA_BOOT_SIZE:jetson-orin-nx-xavier-nx-devkit = "121440"
 BALENA_BOOT_SIZE:jetson-orin-nano-devkit-nvme = "121440"
@@ -24,6 +31,10 @@ IMAGE_ROOTFS_SIZE:jetson-orin-nano-devkit-nvme = "733184"
 IMAGE_ROOTFS_SIZE:jetson-orin-nano-seeed-j3010 = "733184"
 IMAGE_ROOTFS_SIZE:jetson-agx-orin-devkit-64gb = "827392"
 IMAGE_ROOTFS_SIZE:forecr-dsb-ornx-lan = "733184"
+IMAGE_ROOTFS_SIZE:nexcom-atc3750-8m-agx-orin-32gb = "733184"
+IMAGE_ROOTFS_SIZE:nexcom-atc3750-8m-agx-orin-64gb = "733184"
+IMAGE_ROOTFS_SIZE:nexcom-atc3750-6c-agx-orin-32gb = "733184"
+IMAGE_ROOTFS_SIZE:nexcom-atc3750-6c-agx-orin-64gb = "733184"
 
 BALENA_BOOT_PARTITION_FILES:append = " \
     bootfiles/EFI/BOOT/BOOTAA64.efi:/EFI/BOOT/BOOTAA64.efi \

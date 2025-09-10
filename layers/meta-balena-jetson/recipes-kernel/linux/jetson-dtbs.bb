@@ -105,6 +105,29 @@ do_deploy:nexcom-atc3750-8m-agx-orin-64gb() {
 	install -m 0644 "${DEPLOY_DIR_IMAGE}/devicetree/${DTBNAME}" "${DEPLOYDIR}/devicetree/${DTBNAME}"
 }
 
+# Nexcom ATC3750-6C devices use DTBs compiled from DTS patches in nvidia-kernel-oot
+do_install:nexcom-atc3750-6c-agx-orin-32gb() {
+	install -d ${D}/boot/
+	# DTB is deployed by nvidia-kernel-oot recipe to DEPLOY_DIR_IMAGE
+	install -m 0644 "${DEPLOY_DIR_IMAGE}/devicetree/${DTBNAME}" "${D}/boot/${DTBNAME}"
+}
+
+do_deploy:nexcom-atc3750-6c-agx-orin-32gb() {
+	install -d ${DEPLOYDIR}/devicetree/
+	install -m 0644 "${DEPLOY_DIR_IMAGE}/devicetree/${DTBNAME}" "${DEPLOYDIR}/devicetree/${DTBNAME}"
+}
+
+do_install:nexcom-atc3750-6c-agx-orin-64gb() {
+	install -d ${D}/boot/
+	# DTB is deployed by nvidia-kernel-oot recipe to DEPLOY_DIR_IMAGE
+	install -m 0644 "${DEPLOY_DIR_IMAGE}/devicetree/${DTBNAME}" "${D}/boot/${DTBNAME}"
+}
+
+do_deploy:nexcom-atc3750-6c-agx-orin-64gb() {
+	install -d ${DEPLOYDIR}/devicetree/
+	install -m 0644 "${DEPLOY_DIR_IMAGE}/devicetree/${DTBNAME}" "${DEPLOYDIR}/devicetree/${DTBNAME}"
+}
+
 FILES:${PN}:jetson-agx-orin-devkit += " \
 	/boot/tegra234-p3737-0000+p3701-0000-nv.dtb \
 	/boot/tegra234-p3737-0000+p3701-0000-nv-spi.dtb \
@@ -141,5 +164,13 @@ FILES:${PN}:nexcom-atc3750-8m-agx-orin-32gb += " \
 "
 
 FILES:${PN}:nexcom-atc3750-8m-agx-orin-64gb += " \
+	/boot/${DTBNAME} \
+"
+
+FILES:${PN}:nexcom-atc3750-6c-agx-orin-32gb += " \
+	/boot/${DTBNAME} \
+"
+
+FILES:${PN}:nexcom-atc3750-6c-agx-orin-64gb += " \
 	/boot/${DTBNAME} \
 "

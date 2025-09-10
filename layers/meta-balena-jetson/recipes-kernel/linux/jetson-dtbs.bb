@@ -5,10 +5,8 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 # In Jetpack 6.2 the nvidia-kernel-oot-dtb deploys all device-trees
-# Nexcom devices bypass this dependency as they provide pre-built DTBs
+# ATC3750 devices now use DTS patches through nvidia-kernel-oot so they need the dependency
 do_install[depends] += " nvidia-kernel-oot-dtb:do_deploy "
-do_install[depends]:remove:nexcom-atc3750-8m-agx-orin-32gb = "nvidia-kernel-oot-dtb:do_deploy"
-do_install[depends]:remove:nexcom-atc3750-8m-agx-orin-64gb = "nvidia-kernel-oot-dtb:do_deploy"
 
 SRC_URI += " file://tegra234-p3737-0000+p3701-0000-nv-spi.dtb "
 

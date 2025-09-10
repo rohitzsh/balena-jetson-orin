@@ -1,0 +1,11 @@
+[Unit]
+Description=Nexcom control usb power
+DefaultDependencies=no
+After=systemd-reboot.service
+
+[Service]
+Type=simple
+ExecStart=/etc/systemd/ledstate.sh usb-resume
+
+[Install]
+WantedBy=reboot.target

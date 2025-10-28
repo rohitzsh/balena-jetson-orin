@@ -31,11 +31,28 @@ The last L4T 35.5.0 - Jetpack 5-based production releases are:
 
 balenaOS production images for Jetson devices at versions greater than v6.0 are based on Jetpack 6.
 
-Given there is a major BSP upgrade from Jetpack 5 to Jetpack 6, prior to updating your devices to an L4T 36.3-based OS release, we recommend you to:
-* Always test any OS update using lab devices first, to ensure the upgrade path is suitable for your devices and that your container applications are in sync with the host OS
-* If your device has been originally provisioned on an L4T version older than 35.5.0, first update to the last two L4T 35.5.0-based releases. This implies updating first to v5.3.21+rev2, then to v5.3.21+rev3, as this ensures both bootchains are updated to L4T 35.5.0, as required by the Jetpack 6 BSP.
-* Avoid interrupting the update process by rebooting or by cutting power to the device
+## Nexcom ATC3750-8M Support
 
+The Nexcom ATC3750-8M industrial computer is supported with both 32GB and 64GB AGX Orin variants:
+
+* **Device Types**: 
+  - `nexcom-atc3750-8m-agx-orin-32gb` - ATC3750-8M with 32GB AGX Orin module
+  - `nexcom-atc3750-8m-agx-orin-64gb` - ATC3750-8M with 64GB AGX Orin module
+
+* **Hardware Features**:
+  - GPIO validation and mapping completed (68 pins configured)
+  - Serial interfaces: RS232, RS422, RS485 (requires hardware testing)
+  - Network interfaces: Ethernet with PHY support
+  - Storage: eMMC and NVMe support
+
+* **Current Status**: 
+  - Device type definitions: ✅ Complete
+  - Machine configurations: ✅ Complete  
+  - Device tree integration: ✅ Complete
+  - GPIO validation: ✅ Complete
+  - Bootloader integration: ✅ Complete
+
+For detailed GPIO mapping and hardware specifications, see `docs/ATC3750-8M-GPIO-Mapping.md`.
 
 ## Clone/Initialize the repository
 
@@ -63,6 +80,15 @@ argument:
     * Device type is one of the supported devices with a valid `<device type name>.coffee` description file.
     * Shared directory is the absolute path to the build folder
 
+  **ATC3750-8M Examples**:
+  ```bash
+  # Build 32GB variant
+  ./balena-yocto-scripts/build/balena-build.sh -d nexcom-atc3750-8m-agx-orin-32gb -s /path/to/shared/build
+
+  # Build 64GB variant  
+  ./balena-yocto-scripts/build/balena-build.sh -d nexcom-atc3750-8m-agx-orin-64gb -s /path/to/shared/build
+  ```
+
 ### Native build
 
 To build all supported device types natively, please make sure your Linux
@@ -74,6 +100,18 @@ Additional host tools need to be installed for native builds to work.
   `./balena-yocto-scripts/build/barys`
 
 * You can also run barys with the -h switch to inspect the available options
+
+  **ATC3750-8M Examples**:
+  ```bash
+  # Build 32GB variant
+  ./balena-yocto-scripts/build/barys -m nexcom-atc3750-8m-agx-orin-32gb
+
+  # Build 64GB variant
+  ./balena-yocto-scripts/build/barys -m nexcom-atc3750-8m-agx-orin-64gb
+
+  # Dry-run to setup build environment
+  ./balena-yocto-scripts/build/barys --remove-build --dry-run -m nexcom-atc3750-8m-agx-orin-64gb
+  ```
 
 ### Custom build using this repository
 

@@ -1,0 +1,9 @@
+[Unit]
+Description=The OS status Led Service
+
+[Service]
+Type=simple
+ExecStart=/etc/systemd/ledstate.sh boot
+
+[Install]
+WantedBy=sysinit.target

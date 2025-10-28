@@ -9,15 +9,21 @@ set -e
 declare -A device_specific_patches
 
 orin_nano_generic_patch="0001-Orin-Nano-Integrate-with-balenaOS-on-L4T-36.4.patch"
-device_specific_patches["jetson-agx-orin-devkit"]="0001-AGX-Orin-32GB-Integrate-with-balenaOS-on-L4T-36.4.patch"
+agx_orin_32gb_patch="0001-AGX-Orin-32GB-Integrate-with-balenaOS-on-L4T-36.4.patch"
+agx_orin_64gb_patch="0001-AGX-Orin-64GB-Integrate-with-balenaOS-on-L4T-36.4.patch"
+device_specific_patches["jetson-agx-orin-devkit"]="$agx_orin_32gb_patch"
 device_specific_patches["jetson-orin-nano-devkit-nvme"]="$orin_nano_generic_patch"
 device_specific_patches["jetson-orin-nx-xavier-nx-devkit"]="0001-Orin-NX-16GB-Integrate-with-balenaOS-on-L4T-36.4.patch"
 device_specific_patches["jetson-orin-nx-seeed-j4012"]="$orin_nano_generic_patch"
 device_specific_patches["jetson-orin-nano-seeed-j3010"]="$orin_nano_generic_patch"
-device_specific_patches["jetson-agx-orin-devkit-64gb"]="0001-AGX-Orin-64GB-Integrate-with-balenaOS-on-L4T-36.4.patch"
+device_specific_patches["jetson-agx-orin-devkit-64gb"]="$agx_orin_64gb_patch"
 device_specific_patches["forecr-dsb-ornx-orin-nano-8gb"]="$orin_nano_generic_patch"
 device_specific_patches["forecr-dsb-ornx-lan-orin-nano-4gb"]="$orin_nano_generic_patch"
 device_specific_patches["forecr-dsb-ornx-lan-orin-nx-16gb"]="$orin_nano_generic_patch"
+device_specific_patches["nexcom-atc3750-8m-agx-orin-32gb"]="$agx_orin_32gb_patch"
+device_specific_patches["nexcom-atc3750-8m-agx-orin-64gb"]="$agx_orin_64gb_patch"
+device_specific_patches["nexcom-atc3750-6c-agx-orin-32gb"]="$agx_orin_32gb_patch"
+device_specific_patches["nexcom-atc3750-6c-agx-orin-64gb"]="$agx_orin_64gb_patch"
 
 edk2_patch="0001-edk2-Disable-network-boot-and-allow-UEFI-capsule-dow.patch"
 edk2_nvidia_patches=( "0001-edk2-nvidia-Add-changes-for-balenaOS-integration.patch " \

@@ -1,6 +1,38 @@
 inherit kernel-resin deploy
 
 FILESEXTRAPATHS:append := ":${THISDIR}/${PN}"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
+# Add ATC3750-specific patches and configuration for both variants
+SRC_URI:append:nexcom-atc3750-8m-agx-orin-32gb = " \
+    file://atc3xxx-modified-configuration.cfg \
+    file://0001-ksz9477-for-nexcom-atc3750-6c-customized-build.patch \
+    file://0002-driver-support-LTE-modules.patch \
+"
+
+SRC_URI:append:nexcom-atc3750-8m-agx-orin-64gb = " \
+    file://atc3xxx-modified-configuration.cfg \
+    file://0001-ksz9477-for-nexcom-atc3750-6c-customized-build.patch \
+    file://0002-driver-support-LTE-modules.patch \
+"
+
+SRC_URI:append:nexcom-atc3750-6c-agx-orin-32gb = " \
+    file://atc3xxx-modified-configuration.cfg \
+    file://0001-ksz9477-for-nexcom-atc3750-6c-customized-build.patch \
+    file://0002-driver-support-LTE-modules.patch \
+"
+
+SRC_URI:append:nexcom-atc3750-6c-agx-orin-64gb = " \
+    file://atc3xxx-modified-configuration.cfg \
+    file://0001-ksz9477-for-nexcom-atc3750-6c-customized-build.patch \
+    file://0002-driver-support-LTE-modules.patch \
+"
+
+# Add ATC3750 kernel configuration fragment to both 8M and 6C variants
+KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-8m-agx-orin-32gb = " atc3xxx-modified-configuration.cfg"
+KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-8m-agx-orin-64gb = " atc3xxx-modified-configuration.cfg"
+KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-6c-agx-orin-32gb = " atc3xxx-modified-configuration.cfg"
+KERNEL_CONFIG_FRAGMENTS:append:nexcom-atc3750-6c-agx-orin-64gb = " atc3xxx-modified-configuration.cfg"
 
 SCMVERSION="n"
 
@@ -151,6 +183,22 @@ BALENA_CONFIGS:append:jetson-orin-nx-seeed-j4012 = " lan743x "
 BALENA_CONFIGS:append:forecr-dsb-ornx-lan = " lan743x "
 BALENA_CONFIGS[lan743x] = " \
     CONFIG_LAN743X=m \
+"
+
+# Nexcom ATC3750-8M specific configurations
+BALENA_CONFIGS:append:nexcom-atc3750-8m-agx-orin-64gb = " nexcom_atc3750 rtc"
+BALENA_CONFIGS[nexcom_atc3750] = " \
+    CONFIG_AQR_PHY=m \
+    CONFIG_MICREL_PHY=m \
+    CONFIG_SPI_TEGRA210_QUAD=m \
+    CONFIG_USB_SERIAL_FTDI_SIO=m \
+    CONFIG_USB_SERIAL_PL2303=m \
+    CONFIG_USB_ACM=m \
+"
+
+BALENA_CONFIGS[rtc] = " \
+    CONFIG_RTC_HCTOSYS_DEVICE="rtc0" \
+    CONFIG_RTC_SYSTOHC_DEVICE="rtc0" \
 "
 
 L4TVER=" l4tver=${L4T_VERSION}"

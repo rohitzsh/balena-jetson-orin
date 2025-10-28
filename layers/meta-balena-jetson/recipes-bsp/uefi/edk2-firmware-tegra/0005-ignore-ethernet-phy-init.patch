@@ -1,0 +1,25 @@
+From c3e47fcff0331931c2c9d45a558de51e10cefa79 Mon Sep 17 00:00:00 2001
+From: Leo Wang <leowang@nexcom.com.tw>
+Date: Tue, 11 Mar 2025 17:01:33 +0800
+Subject: [PATCH] uefi: ignore ethernet phy init
+
+---
+ Silicon/NVIDIA/Drivers/EqosDeviceDxe/EqosDeviceDxe.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Silicon/NVIDIA/Drivers/EqosDeviceDxe/EqosDeviceDxe.c b/Silicon/NVIDIA/Drivers/EqosDeviceDxe/EqosDeviceDxe.c
+index 37075f8d..3a5a8048 100644
+--- a/Silicon/NVIDIA/Drivers/EqosDeviceDxe/EqosDeviceDxe.c
++++ b/Silicon/NVIDIA/Drivers/EqosDeviceDxe/EqosDeviceDxe.c
+@@ -560,6 +560,8 @@ DeviceDiscoveryNotify (
+         }
+       }
+ 
++      // Modify by Leo
++      return EFI_SUCCESS;
+       // Init PHY
+       Status = PhyDxeInitialization (&Snp->PhyDriver, &Snp->MacDriver);
+       if (EFI_ERROR (Status)) {
+-- 
+2.25.1
+

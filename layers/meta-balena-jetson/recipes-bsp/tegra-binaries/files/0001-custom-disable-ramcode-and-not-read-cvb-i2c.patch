@@ -1,0 +1,36 @@
+From b41ec5c238c8625493e2488939d0f15af60d7473 Mon Sep 17 00:00:00 2001
+From: Leo Wang <leowang@nexcom.com.tw>
+Date: Wed, 5 Mar 2025 16:07:58 +0800
+Subject: [PATCH] custom: disable ramcode and not read cvb i2c.
+
+---
+ bootloader/generic/BCT/tegra234-mb1-bct-misc-p3701-0000.dts | 2 +-
+ bootloader/tegra234-mb2-bct-common.dtsi                     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/bootloader/generic/BCT/tegra234-mb1-bct-misc-p3701-0000.dts b/bootloader/generic/BCT/tegra234-mb1-bct-misc-p3701-0000.dts
+index 99757f4..fc05df5 100644
+--- a/bootloader/generic/BCT/tegra234-mb1-bct-misc-p3701-0000.dts
++++ b/bootloader/generic/BCT/tegra234-mb1-bct-misc-p3701-0000.dts
+@@ -38,7 +38,7 @@
+     misc {
+         disable_sc7 = <0>;
+         enable_tsec = <0>;
+-        enable_4pin_ram_code = <1>;
++        enable_4pin_ram_code = <0>;
+         soctherm {
+             max_chip_limit = <0x69>;
+             min_chip_limit = <0xFFFFFFE4>;
+diff --git a/bootloader/tegra234-mb2-bct-common.dtsi b/bootloader/tegra234-mb2-bct-common.dtsi
+index e77cf41..2bb0268 100644
+--- a/bootloader/tegra234-mb2-bct-common.dtsi
++++ b/bootloader/tegra234-mb2-bct-common.dtsi
+@@ -59,7 +59,7 @@
+             cvm_eeprom_read_size = <0x100>;
+             cvb_eeprom_i2c_instance = <0x0>;
+             cvb_eeprom_i2c_slave_address = <0xac>;
+-            cvb_eeprom_read_size = <0x100>;
++            cvb_eeprom_read_size = <0x0>;
+         };
+ 
+         fsi_vmon_data {
